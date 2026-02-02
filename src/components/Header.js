@@ -1,6 +1,6 @@
 export const Header = (initialValue = 0) => {
   return `
-    <header class="bg-transparent text-primary p-8 md:p-12 font-mono flex flex-col items-center justify-center text-center">
+    <header class="bg-transparent text-primary p-6 md:p-8 font-mono flex flex-col items-center justify-center text-center">
       <h1 class="text-2xl md:text-3xl font-bold mb-4 tracking-wider animate-pulse">UNIT CONVERTER_v1.0</h1>
       <p class="text-sm mb-8">[STATUS: Awaiting input...]</p>
       

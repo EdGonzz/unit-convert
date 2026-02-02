@@ -16,12 +16,14 @@ const format = (num) => num.toFixed(3);
 function typeWriter(element, text, speed = 50) {
   let i = 0;
   element.innerHTML = '';
+  let paragraph = '';
   function type() {
     if (i < text.length) {
-      element.innerHTML += text.charAt(i);
+      paragraph += text.charAt(i);
       i++;
       setTimeout(type, speed);
     }
+    element.innerHTML = paragraph;
   }
   type();
 }
@@ -45,10 +47,10 @@ function render() {
       <div class="w-full max-w-[550px]">
         ${Header(currentValue)}
         
-        <div class="px-6 py-8 md:px-8">
-          ${ResultCard("Length (Meter/Feet)", "")}
-          ${ResultCard("Volume (Liters/Gallons)", "")}
-          ${ResultCard("Mass (Kilograms/Pounds)", "")}
+        <div class="px-6 md:px-8">
+          ${ResultCard("Length (Meter/Feet)")}
+          ${ResultCard("Volume (Liters/Gallons)")}
+          ${ResultCard("Mass (Kilograms/Pounds)")}
         </div>
       </div>
     </div>
@@ -71,6 +73,15 @@ function attachEvents() {
   const btn = document.getElementById('convert-btn');
 
   btn.addEventListener('click', () => {
+    const newVal = parseFloat(input.value);
+    if (!isNaN(newVal)) {
+      currentValue = newVal;
+      render();
+    }
+  });
+
+  input.addEventListener('change', (e) => {
+    e.preventDefault();
     const newVal = parseFloat(input.value);
     if (!isNaN(newVal)) {
       currentValue = newVal;
