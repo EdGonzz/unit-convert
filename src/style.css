@@ -1,5 +1,42 @@
+@import "@fontsource/space-mono";
 @import "tailwindcss";
 
+:root {
+  --background: #0d0d0d;
+  --foreground: #1F2937;
+  --primary: #00ff00;
+  --glow: 0 0 5px var(--primary), 0 0 10px var(--primary), 0 0 20px var(--primary);
+}
+
 body {
-  font-family: 'Ubuntu Sans Variable', sans-serif;
+  font-family: "Space Mono", monospace;
+  background-color: var(--background);
+  color: var(--primary);
+  text-shadow: var(--glow);
+}
+
+.scanline {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(
+    to bottom,
+    rgba(13, 13, 13, 0),
+    rgba(13, 13, 13, 0.75) 50%,
+    rgba(13, 13, 13, 0)
+  );
+  background-size: 100% 4px;
+  animation: scan 10s linear infinite;
+}
+
+@keyframes scan {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -100vh;
+  }
 }
