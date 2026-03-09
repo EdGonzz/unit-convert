@@ -15,7 +15,7 @@ const format = (num) => num.toFixed(3);
 
 function typeWriter(element, text, speed = 50) {
   let i = 0;
-  element.innerHTML = '';
+  element.textContent = '';
   let paragraph = '';
   function type() {
     if (i < text.length) {
@@ -23,7 +23,7 @@ function typeWriter(element, text, speed = 50) {
       i++;
       setTimeout(type, speed);
     }
-    element.innerHTML = paragraph;
+    element.textContent = paragraph;
   }
   type();
 }
