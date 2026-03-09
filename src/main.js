@@ -2,6 +2,7 @@
 import './style.css';
 import { Header } from './components/Header.js';
 import { ResultCard } from './components/ResultCard.js';
+import { format } from './utils.js';
 
 const app = document.querySelector('#app');
 
@@ -10,8 +11,6 @@ let currentValue = 20;
 const METER_TO_FEET = 3.281;
 const LITER_TO_GALLON = 0.264;
 const KILO_TO_POUND = 2.204;
-
-const format = (num) => num.toFixed(3);
 
 function typeWriter(element, text, speed = 50) {
   let i = 0;
