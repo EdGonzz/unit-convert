@@ -48,9 +48,9 @@ function render() {
         ${Header(currentValue)}
         
         <div class="px-6 md:px-8">
-          ${ResultCard("Length (Meter/Feet)")}
-          ${ResultCard("Volume (Liters/Gallons)")}
-          ${ResultCard("Mass (Kilograms/Pounds)")}
+          ${ResultCard("Length (Meter/Feet)", "length-result")}
+          ${ResultCard("Volume (Liters/Gallons)", "volume-result")}
+          ${ResultCard("Mass (Kilograms/Pounds)", "mass-result")}
         </div>
       </div>
     </div>
