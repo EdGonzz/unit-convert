@@ -59,25 +59,24 @@ function render() {
   typeWriter(massResult, massText, 20);
 }
 
+function handleInputChange(e) {
+  const newVal = parseFloat(e.value);
+  if (!isNaN(newVal)) {
+    currentValue = newVal;
+    render();
+  }
+}
+
 function attachEvents() {
   const input = document.getElementById('input-value');
   const btn = document.getElementById('convert-btn');
 
   btn.addEventListener('click', () => {
-    const newVal = parseFloat(input.value);
-    if (!isNaN(newVal)) {
-      currentValue = newVal;
-      render();
-    }
+    handleInputChange(input)
   });
 
   input.addEventListener('change', (e) => {
-    e.preventDefault();
-    const newVal = parseFloat(input.value);
-    if (!isNaN(newVal)) {
-      currentValue = newVal;
-      render();
-    }
+    handleInputChange(input)
   });
 }
 
