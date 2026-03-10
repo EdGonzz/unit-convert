@@ -34,17 +34,17 @@ function render() {
   const massText = `${currentValue} kilos = ${format(mass.forward)} pounds | ${currentValue} pounds = ${format(mass.reverse)} kilos`;
 
   app.innerHTML = `
-    <div class="min-h-screen bg-transparent flex flex-col items-center">
+    <main class="min-h-screen bg-transparent flex flex-col items-center" role="main">
       <div class="w-full max-w-[550px]">
         ${Header(currentValue)}
         
-        <div class="px-6 md:px-8">
+        <section class="px-6 md:px-8" aria-label="Conversion results">
           ${ResultCard("Length (Meter/Feet)", "length-result")}
           ${ResultCard("Volume (Liters/Gallons)", "volume-result")}
           ${ResultCard("Mass (Kilograms/Pounds)", "mass-result")}
-        </div>
+        </section>
       </div>
-    </div>
+    </main>
   `;
 
   attachEvents();
