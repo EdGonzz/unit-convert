@@ -3,26 +3,14 @@ import './style.css';
 import { Header } from './components/Header.js';
 import { ResultCard } from './components/ResultCard.js';
 import { format } from './utils.js';
+import { typeWriter } from './dom-utils.js';
+
 import { convertLength, convertVolume, convertMass } from './conversions.js';
 
 const app = document.querySelector('#app');
 
 let currentValue = 20;
 
-function typeWriter(element, text, speed = 50) {
-  let i = 0;
-  element.textContent = '';
-  let paragraph = '';
-  function type() {
-    if (i < text.length) {
-      paragraph += text.charAt(i);
-      i++;
-      setTimeout(type, speed);
-    }
-    element.textContent = paragraph;
-  }
-  type();
-}
 
 function render() {
   const length = convertLength(currentValue);
