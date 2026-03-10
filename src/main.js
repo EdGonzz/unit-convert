@@ -3,14 +3,11 @@ import './style.css';
 import { Header } from './components/Header.js';
 import { ResultCard } from './components/ResultCard.js';
 import { format } from './utils.js';
+import { convertLength, convertVolume, convertMass } from './conversions.js';
 
 const app = document.querySelector('#app');
 
 let currentValue = 20;
-
-const METER_TO_FEET = 3.281;
-const LITER_TO_GALLON = 0.264;
-const KILO_TO_POUND = 2.204;
 
 function typeWriter(element, text, speed = 50) {
   let i = 0;
@@ -28,18 +25,13 @@ function typeWriter(element, text, speed = 50) {
 }
 
 function render() {
-  const feet = format(currentValue * METER_TO_FEET);
-  const meters = format(currentValue / METER_TO_FEET);
-  
-  const gallons = format(currentValue * LITER_TO_GALLON);
-  const liters = format(currentValue / LITER_TO_GALLON);
-  
-  const pounds = format(currentValue * KILO_TO_POUND);
-  const kilos = format(currentValue / KILO_TO_POUND);
+  const length = convertLength(currentValue);
+  const volume = convertVolume(currentValue);
+  const mass = convertMass(currentValue);
 
-  const lengthText = `${currentValue} meters = ${feet} feet | ${currentValue} feet = ${meters} meters`;
-  const volumeText = `${currentValue} liters = ${gallons} gallons | ${currentValue} gallons = ${liters} liters`;
-  const massText = `${currentValue} kilos = ${pounds} pounds | ${currentValue} pounds = ${kilos} kilos`;
+  const lengthText = `${currentValue} meters = ${format(length.forward)} feet | ${currentValue} feet = ${format(length.reverse)} meters`;
+  const volumeText = `${currentValue} liters = ${format(volume.forward)} gallons | ${currentValue} gallons = ${format(volume.reverse)} liters`;
+  const massText = `${currentValue} kilos = ${format(mass.forward)} pounds | ${currentValue} pounds = ${format(mass.reverse)} kilos`;
 
   app.innerHTML = `
     <div class="min-h-screen bg-transparent flex flex-col items-center">
