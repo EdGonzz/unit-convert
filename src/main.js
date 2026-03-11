@@ -11,7 +11,13 @@ const app = document.querySelector('#app');
 
 let currentValue = 20;
 
+/** @type {boolean} */
+let isInitialRender = true;
 
+/**
+ * Mount the static shell once, then perform targeted DOM updates.
+ * Avoids full innerHTML replacement, preserving event listeners and focus.
+ */
 function render() {
   const length = convertLength(currentValue);
   const volume = convertVolume(currentValue);
@@ -21,23 +27,26 @@ function render() {
   const volumeText = `${currentValue} liters = ${format(volume.forward)} gallons | ${currentValue} gallons = ${format(volume.reverse)} liters`;
   const massText = `${currentValue} kilos = ${format(mass.forward)} pounds | ${currentValue} pounds = ${format(mass.reverse)} kilos`;
 
-  app.innerHTML = `
-    <main class="min-h-screen bg-transparent flex flex-col items-center" role="main">
-      <div class="w-full max-w-[550px]">
-        ${Header(currentValue)}
-        
-        <section class="px-6 md:px-8" aria-label="Conversion results">
-          ${ResultCard("Length (Meter/Feet)", "length-result")}
-          ${ResultCard("Volume (Liters/Gallons)", "volume-result")}
-          ${ResultCard("Mass (Kilograms/Pounds)", "mass-result")}
-        </section>
-      </div>
-    </main>
-  `;
+  if (isInitialRender) {
+    app.innerHTML = `
+      <main class="min-h-screen bg-transparent flex flex-col items-center" role="main">
+        <div class="w-full max-w-[550px]">
+          ${Header(currentValue)}
+          
+          <section class="px-6 md:px-8" aria-label="Conversion results">
+            ${ResultCard("Length (Meter/Feet)", "length-result")}
+            ${ResultCard("Volume (Liters/Gallons)", "volume-result")}
+            ${ResultCard("Mass (Kilograms/Pounds)", "mass-result")}
+          </section>
+        </div>
+      </main>
+    `;
 
-  attachEvents();
+    attachEvents();
+    isInitialRender = false;
+  }
 
-  // Typing animation for results
+  // Targeted updates — only touch the text nodes that actually change
   const lengthResult = document.getElementById('length-result');
   const volumeResult = document.getElementById('volume-result');
   const massResult = document.getElementById('mass-result');
@@ -60,11 +69,11 @@ function attachEvents() {
   const btn = document.getElementById('convert-btn');
 
   btn.addEventListener('click', () => {
-    handleInputChange(input)
+    handleInputChange(input);
   });
 
   input.addEventListener('change', (e) => {
-    handleInputChange(input)
+    handleInputChange(input);
   });
 }
 

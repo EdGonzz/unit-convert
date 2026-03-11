@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.18",
+    "jsdom": "^28.1.0",
     "tailwindcss": "^4.1.18",
     "vite": "^7.2.4",
     "vitest": "^4.0.18"
